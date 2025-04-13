@@ -1,13 +1,13 @@
 
 import { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { LightningBolt, Brain, Coffee, Code, Heart } from "lucide-react";
+import { Zap, Brain, Coffee, Code, Heart } from "lucide-react";
 
 const About = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const imageRef = useRef(null);
+  const titleRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -69,7 +69,7 @@ const About = () => {
             
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <LightningBolt className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                <Zap className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                 <p className="text-muted-foreground">
                   I transform complex problems into elegant, efficient solutions with code that's as clean as it is functional.
                 </p>
