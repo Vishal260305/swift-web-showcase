@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -21,11 +22,23 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Determine which section is in view
+      const sectionIds = navLinks.map(link => link.href.substring(1));
+      const scrollPosition = window.scrollY + 100; // Offset to trigger a bit earlier
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
     };
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [navLinks]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -54,7 +67,12 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium rounded-md hover:text-primary transition-colors"
+                className={cn(
+                  "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                  activeSection === link.href.substring(1)
+                    ? "text-primary font-semibold"
+                    : "hover:text-primary"
+                )}
               >
                 {link.name}
               </a>
@@ -90,7 +108,12 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="block px-3 py-2 text-base font-medium rounded-md hover:text-primary transition-colors"
+              className={cn(
+                "block px-3 py-2 text-base font-medium rounded-md transition-colors",
+                activeSection === link.href.substring(1)
+                  ? "text-primary font-semibold"
+                  : "hover:text-primary"
+              )}
               onClick={closeMenu}
             >
               {link.name}

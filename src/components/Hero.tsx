@@ -1,5 +1,5 @@
 
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SocialLinks from "./SocialLinks";
 
@@ -25,8 +25,11 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Button size="lg" asChild>
-              <a href="#projects">View My Work</a>
+            <Button size="lg" className="gap-2" asChild>
+              <a href="#resume">
+                <Download className="h-5 w-5" />
+                Download Resume
+              </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <a href="#contact">Contact Me</a>
