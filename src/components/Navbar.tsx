@@ -15,7 +15,6 @@ const Navbar = () => {
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
-    { name: "Resume", href: "#resume" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -62,7 +61,7 @@ const Navbar = () => {
           <a href="#home" className="text-xl font-bold gradient-text">Portfolio</a>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
