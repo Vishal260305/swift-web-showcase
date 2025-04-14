@@ -78,7 +78,7 @@ const Skills = () => {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent side="top" className="bg-primary text-primary-foreground">
-                  <p>I'm proficient with {skill.name}</p>
+                  <p>{skill.name}</p>
                 </TooltipContent>
               </Tooltip>
             ))}
