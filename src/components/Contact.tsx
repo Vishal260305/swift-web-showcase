@@ -9,9 +9,9 @@ import SocialLinks from "./SocialLinks";
 import { cn } from "@/lib/utils";
 
 const Contact = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
+  const formRef = useRef(null);
+  const infoRef = useRef(null);
   
   const [formState, setFormState] = useState({
     name: "",
@@ -22,14 +22,14 @@ const Contact = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -51,12 +51,12 @@ const Contact = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            formRef.current?.classList.add("animate-fade-in-up");
-            formRef.current?.classList.remove("opacity-0");
+            infoRef.current?.classList.add("animate-fade-in-up");
+            infoRef.current?.classList.remove("opacity-0");
             
             setTimeout(() => {
-              infoRef.current?.classList.add("animate-fade-in-up");
-              infoRef.current?.classList.remove("opacity-0");
+              formRef.current?.classList.add("animate-fade-in-up");
+              formRef.current?.classList.remove("opacity-0");
             }, 200);
           }
         });
@@ -80,8 +80,53 @@ const Contact = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div 
+            ref={infoRef} 
+            className="space-y-8 opacity-0 order-2 lg:order-1"
+            style={{ animationFillMode: "forwards" }}
+          >
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              
+              <ul className="space-y-6">
+                <li className="flex items-start hover:translate-x-1 transition-transform">
+                  <MapPin className="h-6 w-6 text-primary mr-4 mt-1" />
+                  <div>
+                    <h4 className="font-medium">Location</h4>
+                    <address className="not-italic text-muted-foreground">
+                      San Francisco, California, USA
+                    </address>
+                  </div>
+                </li>
+                <li className="flex items-start hover:translate-x-1 transition-transform">
+                  <Phone className="h-6 w-6 text-primary mr-4 mt-1" />
+                  <div>
+                    <h4 className="font-medium">Phone</h4>
+                    <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary">
+                      +1 (234) 567-890
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start hover:translate-x-1 transition-transform">
+                  <Mail className="h-6 w-6 text-primary mr-4 mt-1" />
+                  <div>
+                    <h4 className="font-medium">Email</h4>
+                    <a href="mailto:john@example.com" className="text-muted-foreground hover:text-primary">
+                      john@example.com
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold mb-4">Follow Me</h3>
+              <SocialLinks iconSize={24} />
+            </div>
+          </div>
+          
+          <div 
             ref={formRef} 
-            className="bg-card rounded-xl shadow-md p-8 opacity-0"
+            className="bg-card rounded-xl shadow-md p-8 opacity-0 order-1 lg:order-2"
             style={{ animationFillMode: "forwards" }}
           >
             <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
@@ -124,51 +169,6 @@ const Contact = () => {
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
-          </div>
-          
-          <div 
-            ref={infoRef} 
-            className="space-y-8 opacity-0"
-            style={{ animationFillMode: "forwards" }}
-          >
-            <div>
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              
-              <ul className="space-y-6">
-                <li className="flex items-start">
-                  <MapPin className="h-6 w-6 text-primary mr-4 mt-1" />
-                  <div>
-                    <h4 className="font-medium">Location</h4>
-                    <address className="not-italic text-muted-foreground">
-                      San Francisco, California, USA
-                    </address>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <Phone className="h-6 w-6 text-primary mr-4 mt-1" />
-                  <div>
-                    <h4 className="font-medium">Phone</h4>
-                    <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary">
-                      +1 (234) 567-890
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <Mail className="h-6 w-6 text-primary mr-4 mt-1" />
-                  <div>
-                    <h4 className="font-medium">Email</h4>
-                    <a href="mailto:john@example.com" className="text-muted-foreground hover:text-primary">
-                      john@example.com
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-bold mb-4">Follow Me</h3>
-              <SocialLinks iconSize={24} />
-            </div>
           </div>
         </div>
       </div>
